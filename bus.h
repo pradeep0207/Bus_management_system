@@ -12,11 +12,11 @@ private:
     int maxSeats;
     int bookedSeats;
     double busFare;
-    char busNo[10];
-    char source[20];
-    char destination[20];
-    char sourceTime[20];
-    char destinationTime[20];
+    std::string<int, 10> busNo;
+    std::string<int, 20> source;
+    std::string<int, 20>destination;
+    std::string<int, 20>sourceTime;
+    std::string<int, 20>destinationTime;
 
 public:
     Bus()
