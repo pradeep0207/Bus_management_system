@@ -9,9 +9,9 @@ namespace std;
 class Bus
 {
 private:
-    int maxSeats=32;
-    int bookedSeats=0;
-    double busFare=0.0;
+    int maxSeats;
+    int bookedSeats;
+    double busFare;
     std::string<int, 10> busNo;
     std::string<int, 20> source;
     std::string<int, 20>destination;
@@ -22,6 +22,9 @@ public:
     Bus()
     {
         strcpy(busNo, "");
+        maxSeats=32;
+        bookedSeats=0;
+        busFare=0.0
         strcpy(source, "");
         strcpy(destination, "");
         strcpy(sourceTime, "");
