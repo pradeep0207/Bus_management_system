@@ -191,7 +191,7 @@ void Bus::editBus()
             busFileStream.read((char *)this, sizeof(*this));
         }
 
-        if (chk = 1)
+        if (chk == 1)
         {
             cout << "\n\t\t\t\t\t\t\t\t\t\tBus Updated Successfully...!!\n";
         }
