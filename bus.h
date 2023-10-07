@@ -3,15 +3,20 @@
 
 #include <iostream>
 
-using namespace std;
+namespace std;
 
 // CLASS BUS
 class Bus
 {
 private:
-    int maxSeats, bookedSeats;
+    int maxSeats;
+    int bookedSeats;
     double busFare;
-    char busNo[10], source[20], destination[20], sourceTime[20], destinationTime[20];
+    char busNo[10];
+    char source[20];
+    char destination[20];
+    char sourceTime[20];
+    char destinationTime[20];
 
 public:
     Bus()
