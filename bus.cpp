@@ -85,7 +85,7 @@ void Bus::viewBusDetails()
 {
     system("cls");
 
-    std::array<int, 10> bNo;
+    std::string<char, 10> bNo;
     int chk = 0;
     fstream busFileStream;
 
@@ -128,7 +128,7 @@ void Bus::editBus()
 {
     system("cls");
 
-    std::array<int, 10> bNo;;
+    std::string<char, 10> bNo;;
     int chk = 0;
 
     fstream busFileStream;
@@ -160,10 +160,10 @@ void Bus::editBus()
 
                 showBusDetails();
 
-                std::array<int, 20> s;
-                std::array<int, 20> d;
-                std::array<int, 20> sTime;
-                std::array<int, 20> dTime;
+                std::string<char, 20> s;
+                std::string<char, 20> d;
+                std::string<char, 20> sTime;
+                std::string<char, 20> dTime;
                 double fare;
                 cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Source:-> ";
                 cin.getline(s, 20);
@@ -213,7 +213,7 @@ void Bus::deleteBus()
 {
     system("cls");
 
-    std::array<int, 10> bNo;;
+    std::string<char, 10> bNo;;
     int chk = 0;
     fstream busFileStream;
     fstream tempFileStream;
