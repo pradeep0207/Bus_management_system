@@ -131,7 +131,8 @@ void Bus::editBus()
     std::array<int, 10> bNo;;
     int chk = 0;
 
-    fstream busFileStream, tempFileStream;
+    fstream busFileStream;
+    fstream tempFileStream;
 
     printHeading("EDIT BUS");
     cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Bus Number:-> ";
@@ -214,7 +215,8 @@ void Bus::deleteBus()
 
     std::array<int, 10> bNo;;
     int chk = 0;
-    fstream busFileStream, tempFileStream;
+    fstream busFileStream;
+    fstream tempFileStream;
 
     printHeading("DELETE BUS");
     cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Bus No:-> ";
