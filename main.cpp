@@ -95,7 +95,8 @@ void mainMenu()
 // ADMIN LOGIN
 void adminLogin()
 {
-    string adminUname, adminPass;
+    string adminUname;
+    string adminPass;
 
     system("cls");
 
