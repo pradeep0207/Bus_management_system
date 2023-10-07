@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-namespace std;
+using namespace std;
 
 // CLASS BUS
 class Bus
