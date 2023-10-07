@@ -5,7 +5,7 @@
 #include <string>
 #include <ctime>
 
-using namespace std;
+namespace std;
 
 void printHeading(string header)
 {
