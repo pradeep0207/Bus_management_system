@@ -8,6 +8,7 @@
 #include "ticket.h"
 #include "utils.h"
 
+namespace std;
 // ADD BUS
 void Bus::addBus()
 {
