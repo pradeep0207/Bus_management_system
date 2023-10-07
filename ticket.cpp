@@ -8,7 +8,7 @@
 #include "bus.h"
 #include "utils.h"
 
-using namespace std;
+namespace std;
 
 // GENERATE TICKET
 void Ticket::generateTicket(char *n, Bus b)
@@ -43,11 +43,15 @@ void Ticket::bookTicket()
 {
     system("cls");
 
-    char from[20], to[20];
+    std::string<char, 20>from;
+    std::string<char, 20>to;
+    
     int chk = 0;
 
     Bus b;
-    fstream busFileStream, ticketFileStream, tempFileStream;
+    fstream busFileStream;
+    fstream ticketFileStream;
+    fstream tempFileStream;
 
     printHeading("BOOK TICKET");
 
@@ -87,7 +91,7 @@ void Ticket::bookTicket()
         }
         else
         {
-            char bNo[10];
+            std::string<char, 10>bNo;
             int booked = 0;
 
             cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Bus Number:-> ";
@@ -110,7 +114,7 @@ void Ticket::bookTicket()
                     {
                         system("cls");
                         printHeading("BOOK TICKET");
-                        char n[20];
+                        std::string<char, 20>n;
                         cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Customer Name :-> ";
                         cin.getline(n, 20);
                         b.setBookedSeats();
@@ -154,7 +158,10 @@ void Ticket::cancelTicket()
     char pnr[10];
     int chk = 0;
 
-    fstream busFileStream, ticketFileStream, tempFileStream, busTempFileStream;
+    fstream busFileStream;
+    fstream ticketFileStream;
+    fstream tempFileStream;
+    fstreambusTempFileStream;
 
     printHeading("CANCEL TICKET");
     cout << "\n\t\t\t\t\t\t\t\t\t\tEnter PNR Number:-> ";
@@ -273,7 +280,7 @@ void Ticket::editTicket()
             ticketFileStream.read((char *)this, sizeof(*this));
         }
 
-        if (chk = 1)
+        if (chk == 1)
         {
             cout << "\n\t\t\t\t\t\t\t\t\t\tTicket Updated Successfully...!!\n";
         }
@@ -294,7 +301,7 @@ void Ticket::showTicketsByPNR()
 {
     system("cls");
 
-    char pnr[10];
+    std::string<char, 10>pnr;
     int chk = 0;
     fstream ticketFileStream;
 
@@ -338,7 +345,7 @@ void Ticket::showTicketsByName()
 {
     system("cls");
 
-    char n[20];
+    std::string<char, 20>n;
     int chk = 0;
     fstream ticketFileStream;
 
@@ -382,7 +389,7 @@ void Ticket::showTicketsByBus()
 {
     system("cls");
 
-    char bNo[10];
+    std::string<char, 10>bNo;
     int chk = 0;
     fstream ticketFileStream;
 
@@ -426,7 +433,7 @@ void Ticket::showTicketsBySource()
 {
     system("cls");
 
-    char s[20];
+    std::string<char, 20>s;
     int chk = 0;
     fstream ticketFileStream;
 
@@ -470,7 +477,7 @@ void Ticket::showTicketsByDestination()
 {
     system("cls");
 
-    char d[20];
+    std::string<char, 20>d;
     int chk = 0;
     fstream ticketFileStream;
 
