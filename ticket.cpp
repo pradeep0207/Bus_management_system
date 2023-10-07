@@ -155,7 +155,7 @@ void Ticket::cancelTicket()
 {
     system("cls");
 
-    char pnr[10];
+    std::string<char, 10>pnr;
     int chk = 0;
 
     fstream busFileStream;
@@ -235,10 +235,11 @@ void Ticket::editTicket()
 {
     system("cls");
 
-    char pnr[10];
+    std::string<char, 10>pnr;
     int chk = 0;
 
-    fstream ticketFileStream, tempFileStream;
+    fstream ticketFileStream;
+    fstream tempFileStream;
 
     printHeading("EDIT TICKET");
     cout << "\n\t\t\t\t\t\t\t\t\t\tEnter PNR Number:-> ";
