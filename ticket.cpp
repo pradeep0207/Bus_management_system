@@ -266,7 +266,7 @@ void Ticket::editTicket()
                 printHeading("EDIT TICKET");
 
                 displayTicket();
-                char n[20];
+                std::string<char, 20>n;
                 cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Passenger Name :-> ";
                 cin.getline(n, 20);
                 setName(n);
