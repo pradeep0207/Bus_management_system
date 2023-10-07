@@ -49,7 +49,7 @@ void mainMenu()
 {
     int choice;
 
-    while (1)
+    while (true)
     {
         system("cls");
 
@@ -124,7 +124,7 @@ void userMenu()
 
     int choice;
 
-    while (1)
+    while (true)
     {
         system("cls");
 
@@ -186,7 +186,7 @@ void adminMenu()
 
     int choice;
 
-    while (1)
+    while (true)
     {
         system("cls");
 
@@ -284,7 +284,7 @@ void viewBookingsMenu()
 
     int choice;
 
-    while (1)
+    while (true)
     {
         system("cls");
 
