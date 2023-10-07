@@ -85,7 +85,7 @@ void Bus::viewBusDetails()
 {
     system("cls");
 
-    char bNo[10];
+    std::array<int, 10> bNo;
     int chk = 0;
     fstream busFileStream;
 
