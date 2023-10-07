@@ -9,7 +9,9 @@
 class Ticket
 {
 private:
-    char name[20], pnrNo[10], date[20];
+    std::string<char, 20>name;
+    std::string<char, 10>pnrNo;
+    std::string<char, 20>date;
     Bus bus;
 
 public:
@@ -42,7 +44,7 @@ public:
     }
 
     // SETTERS
-    void setName(char *n)
+    void setName(const char *n)
     {
         if (n && n[0])
             strcpy(name, n);
