@@ -44,10 +44,10 @@ public:
     }
 
     // SETTERS
-    void setName(const std::string& n)
+    void setName(const std::string& n) const
     {
         if (!n.empty())
-            std::string name= n;
+            name= n;
     }
 };
 #endif // !TICKET_H
