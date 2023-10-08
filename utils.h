@@ -6,6 +6,7 @@
 #include <iostream>
 #include <random>
 #include <string>
+#include <chrono>
 
 using namespace std;
 
@@ -26,11 +27,16 @@ std::string generatePNR(int n)
     return "PNR" + std::to_string(randomNo);
 }
 
-string getCurrentDate()
+std::string getCurrentDate()
 {
-    time_t t = time(NULL);
-    tm *tPtr = localtime(&t);
+    auto now = std::chrono::system_clock::now();
 
-    return to_string(tPtr->tm_mday) + "-" + to_string((tPtr->tm_mon) + 1) + "-" + to_string((tPtr->tm_year) + 1900);
+    std::time_t t = std::chrono::system_clock::to_time_t(now);
+
+    std::tm tPtr = *std::localtime(&t);
+
+    std::strftime(buffer, sizeof(buffer), "%d-%m-%Y", &tPtr);
+
+    return std::string(buffer);
 }
-#endif // UTILS_H
+#endif
