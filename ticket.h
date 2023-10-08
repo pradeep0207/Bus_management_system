@@ -9,9 +9,9 @@
 class Ticket
 {
 private:
-    std::string name;
-    std::string pnrNo;
-    std::string date;
+    std::string name="";
+    std::string pnrNo="";
+    std::string date="";
     Bus bus;
 
 public:
