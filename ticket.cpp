@@ -8,34 +8,32 @@
 #include "bus.h"
 #include "utils.h"
 
-namespace std;
-
 // GENERATE TICKET
-void Ticket::generateTicket(char *n, Bus b)
+void Ticket::generateTicket(std::string n, Bus b)
 {
-    strcpy(name, n);
-    strcpy(pnrNo, generatePNR(99999).c_str());
-    strcpy(date, getCurrentDate().c_str());
+    std::string name =n;
+    std::string pnrNo = generatePNR(99999).c_str();
+    std::string date =getCurrentDate().c_str();
     bus = b;
 }
 
 // DISPLAY TICKET DETAILS
 void Ticket::displayTicket()
 {
-    cout << "\t\t\t\t\t\t\t\t\t\t-------------------------------------------------\n";
-    cout << "\t\t\t\t\t\t\t\t\t\t Name:-> " << getName();
-    cout << "\n\t\t\t\t\t\t\t\t\t\t PNR No:-> " << getPnrNo();
-    cout << "\n\t\t\t\t\t\t\t\t\t\t Bus No:-> " << bus.getBusNo();
-    cout << "\n\t\t\t\t\t\t\t\t\t\t Seat No.:-> " << bus.getBookedSeats();
-    cout << "\n\t\t\t\t\t\t\t\t\t\t Date:-> " << getDate();
-    cout << "\n\t\t\t\t\t\t\t\t\t\t From:-> " << bus.getSource();
-    cout << "\n\t\t\t\t\t\t\t\t\t\t To:-> " << bus.getDestination();
-    cout << "\n\t\t\t\t\t\t\t\t\t\t Source Time:-> " << bus.getSourceTime();
-    cout << "\n\t\t\t\t\t\t\t\t\t\t Destination Time:-> " << bus.getDestinationTime();
-    cout << fixed << setprecision(2);
-    cout << "\n\t\t\t\t\t\t\t\t\t\t Bus Fare:-> " << bus.getBusFare();
-    cout << "\n\t\t\t\t\t\t\t\t\t\t-------------------------------------------------\n";
-    cout << "\n";
+    std::cout << "\t\t\t\t\t\t\t\t\t\t-------------------------------------------------\n";
+    std::cout << "\t\t\t\t\t\t\t\t\t\t Name:-> " << getName();
+    std::cout << "\n\t\t\t\t\t\t\t\t\t\t PNR No:-> " << getPnrNo();
+    std::cout << "\n\t\t\t\t\t\t\t\t\t\t Bus No:-> " << bus.getBusNo();
+    std::cout << "\n\t\t\t\t\t\t\t\t\t\t Seat No.:-> " << bus.getBookedSeats();
+    std::cout << "\n\t\t\t\t\t\t\t\t\t\t Date:-> " << getDate();
+    std::cout << "\n\t\t\t\t\t\t\t\t\t\t From:-> " << bus.getSource();
+    std::cout << "\n\t\t\t\t\t\t\t\t\t\t To:-> " << bus.getDestination();
+    std::cout << "\n\t\t\t\t\t\t\t\t\t\t Source Time:-> " << bus.getSourceTime();
+    std::cout << "\n\t\t\t\t\t\t\t\t\t\t Destination Time:-> " << bus.getDestinationTime();
+    std::cout << std::fixed << std::setprecision(2);
+    std::cout << "\n\t\t\t\t\t\t\t\t\t\t Bus Fare:-> " << bus.getBusFare();
+    std::cout << "\n\t\t\t\t\t\t\t\t\t\t-------------------------------------------------\n";
+    std::cout << "\n";
 }
 
 // BOOK TICKET
@@ -43,31 +41,30 @@ void Ticket::bookTicket()
 {
     system("cls");
 
-    std::string<char, 20>from;
-    std::string<char, 20>to;
-    
+    std::string from;
+    std::string to;
+
     int chk = 0;
 
     Bus b;
-    fstream busFileStream;
-    fstream ticketFileStream;
-    fstream tempFileStream;
+    std::fstream busFileStream;
+    std::fstream ticketFileStream;
+    std::fstream tempFileStream;
 
     printHeading("BOOK TICKET");
 
-    busFileStream.open("buses.txt", ios::in | ios::app | ios::binary);
+    busFileStream.open("buses.txt", std::ios::in | std::ios::app | std::ios::binary);
     if (busFileStream.fail())
     {
-        cout << "\n\t\t\t\t\t\t\t\t\t\tCan't Open File...!!\n";
+        std::cout << "\n\t\t\t\t\t\t\t\t\t\tCan't Open File...!!\n";
     }
-
     else
     {
-        cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Source:-> ";
-        cin.ignore();
-        cin.getline(from, 20);
-        cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Destination:-> ";
-        cin.getline(to, 20);
+        std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Source:-> ";
+        std::cin.ignore();
+        std::getline(std::cin,from);
+        std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Destination:-> ";
+        std::getline(std::cin,to);
 
         system("cls");
         printHeading("AVAILABLE BUSES");
@@ -75,7 +72,7 @@ void Ticket::bookTicket()
         busFileStream.read((char *)&b, sizeof(b));
         while (!busFileStream.eof())
         {
-            if (strcmpi(b.getSource(), from) == 0 && strcmpi(b.getDestination(), to) == 0)
+            if (b.getSource() == from && b.getDestination() == to)
             {
                 b.showBusDetails();
                 chk = 1;
@@ -87,39 +84,39 @@ void Ticket::bookTicket()
 
         if (chk == 0)
         {
-            cout << "\n\t\t\t\t\t\t\t\t\t\tNo Buses Found...!!\n";
+            std::cout << "\n\t\t\t\t\t\t\t\t\t\tNo Buses Found...!!\n";
         }
         else
         {
-            std::string<char, 10>bNo;
+            std::string bNo;
             int booked = 0;
 
-            cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Bus Number:-> ";
-            cin.getline(bNo, 10);
+            std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Bus Number:-> ";
+            std::getline(std::cin,bNo);
 
-            busFileStream.open("buses.txt", ios::in | ios::app | ios::binary);
-            tempFileStream.open("temp.txt", ios::out | ios::app | ios::binary);
+            busFileStream.open("buses.txt", std::ios::in | std::ios::app | std::ios::binary);
+            tempFileStream.open("temp.txt", std::ios::out | std::ios::app | std::ios::binary);
 
             busFileStream.read((char *)&b, sizeof(b));
             while (!busFileStream.eof())
             {
-                if (strcmpi(b.getSource(), from) == 0 && strcmpi(b.getDestination(), to) == 0 && strcmp(b.getBusNo(), bNo) == 0)
+                if (b.getSource() == from && b.getDestination() == to && b.getBusNo().compare(bNo) == 0)
                 {
                     if (b.getBookedSeats() >= 32)
                     {
-                        cout << "\n\t\t\t\t\t\t\t\t\t\tSeat not available...!!\n";
+                        std::cout << "\n\t\t\t\t\t\t\t\t\t\tSeat not available...!!\n";
                         break;
                     }
                     else
                     {
                         system("cls");
                         printHeading("BOOK TICKET");
-                        std::string<char, 20>n;
-                        cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Customer Name :-> ";
-                        cin.getline(n, 20);
+                        std::string n;
+                        std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Customer Name :-> ";
+                        std::getline(std::cin,n);
                         b.setBookedSeats();
                         generateTicket(n, b);
-                        ticketFileStream.open("tickets.txt", ios::out | ios::app | ios::binary);
+                        ticketFileStream.open("tickets.txt", std::ios::out | std::ios::app | std::ios::binary);
                         ticketFileStream.write((char *)this, sizeof(*this));
                         ticketFileStream.close();
                         tempFileStream.write((char *)&b, sizeof(b));
@@ -128,7 +125,7 @@ void Ticket::bookTicket()
                         system("cls");
                         printHeading("BOOKING DETAILS");
                         displayTicket();
-                        cout << "\n\t\t\t\t\t\t\t\t\t\tTicket Booked Successfully...!!\n";
+                        std::cout << "\n\t\t\t\t\t\t\t\t\t\tTicket Booked Successfully...!!\n";
                     }
                 }
                 else
@@ -155,25 +152,25 @@ void Ticket::cancelTicket()
 {
     system("cls");
 
-    std::string<char, 10>pnr;
+    std::string pnr;
     int chk = 0;
 
-    fstream busFileStream;
-    fstream ticketFileStream;
-    fstream tempFileStream;
-    fstreambusTempFileStream;
+    std::fstream busFileStream;
+    std::fstream ticketFileStream;
+    std::fstream tempFileStream;
+    std::fstream busTempFileStream;
 
     printHeading("CANCEL TICKET");
-    cout << "\n\t\t\t\t\t\t\t\t\t\tEnter PNR Number:-> ";
-    cin.ignore();
-    cin.getline(pnr, 10);
+    std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter PNR Number:-> ";
+    std::cin.ignore();
+    std::getline(std::cin,pnr);
 
-    ticketFileStream.open("tickets.txt", ios::in | ios::app | ios::binary);
-    tempFileStream.open("temp.txt", ios::out | ios::app | ios::binary);
+    ticketFileStream.open("tickets.txt", std::ios::in | std::ios::app | std::ios::binary);
+    tempFileStream.open("temp.txt", std::ios::out | std::ios::app | std::ios::binary);
 
     if (ticketFileStream.fail())
     {
-        cout << "\n\t\t\t\t\t\t\t\t\t\tCan't Open File...!!\n";
+        std::cout << "\n\t\t\t\t\t\t\t\t\t\tCan't Open File...!!\n";
     }
 
     else
@@ -181,20 +178,20 @@ void Ticket::cancelTicket()
         ticketFileStream.read((char *)this, sizeof(*this));
         while (!ticketFileStream.eof())
         {
-            if (strcmp(getPnrNo(), pnr) != 0)
+            if (getPnrNo().compare(pnr) != 0)
             {
                 tempFileStream.write((char *)this, sizeof(*this));
             }
             else
             {
                 Bus b;
-                busFileStream.open("buses.txt", ios::in | ios::app | ios::binary);
-                busTempFileStream.open("bustemp.txt", ios::out | ios::app | ios::binary);
+                busFileStream.open("buses.txt",std::ios::in | std::ios::app | std::ios::binary);
+                busTempFileStream.open("bustemp.txt", std::ios::out | std::ios::app | std::ios::binary);
 
                 busFileStream.read((char *)&b, sizeof(b));
                 while (!busFileStream.eof())
                 {
-                    if (strcmp(b.getBusNo(), bus.getBusNo()) == 0)
+                    if (b.getBusNo().compare(bus.getBusNo()) == 0)
                     {
                         b.setCancelTicket();
                         busTempFileStream.write((char *)&b, sizeof(b));
@@ -217,7 +214,7 @@ void Ticket::cancelTicket()
         {
             ticketFileStream.close();
             tempFileStream.close();
-            cout << "\n\t\t\t\t\t\t\t\t\t\tTicket Not Found...!!\n";
+            std::cout << "\n\t\t\t\t\t\t\t\t\t\tTicket Not Found...!!\n";
         }
         else
         {
@@ -225,7 +222,7 @@ void Ticket::cancelTicket()
             tempFileStream.close();
             remove("tickets.txt");
             rename("temp.txt", "tickets.txt");
-            cout << "\n\t\t\t\t\t\t\t\t\t\tTicket Cancelled...!!\n";
+            std::cout << "\n\t\t\t\t\t\t\t\t\t\tTicket Cancelled...!!\n";
         }
     }
 }
@@ -235,40 +232,40 @@ void Ticket::editTicket()
 {
     system("cls");
 
-    std::string<char, 10>pnr;
+    std::string pnr;
     int chk = 0;
 
-    fstream ticketFileStream;
-    fstream tempFileStream;
+    std::fstream ticketFileStream;
+    std::fstream tempFileStream;
 
     printHeading("EDIT TICKET");
-    cout << "\n\t\t\t\t\t\t\t\t\t\tEnter PNR Number:-> ";
-    cin.ignore();
-    cin.getline(pnr, 10);
+    std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter PNR Number:-> ";
+    std::cin.ignore();
+    std::getline(std::cin, pnr);
 
-    ticketFileStream.open("tickets.txt", ios::in | ios::app | ios::binary);
+    ticketFileStream.open("tickets.txt", std::ios::in | std::ios::app | std::ios::binary);
 
     if (ticketFileStream.fail())
     {
-        cout << "\n\t\t\t\t\t\t\t\t\t\tCan't Open File...!!\n";
+        std::cout << "\n\t\t\t\t\t\t\t\t\t\tCan't Open File...!!\n";
     }
 
     else
     {
-        tempFileStream.open("temp.txt", ios::out | ios::app | ios::binary);
+        tempFileStream.open("temp.txt", std::ios::out | std::ios::app | std::ios::binary);
 
         ticketFileStream.read((char *)this, sizeof(*this));
         while (!ticketFileStream.eof())
         {
-            if (strcmp(getPnrNo(), pnr) == 0)
+            if (getPnrNo().compare(pnr) == 0)
             {
                 system("cls");
                 printHeading("EDIT TICKET");
 
                 displayTicket();
-                std::string<char, 20>n;
-                cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Passenger Name :-> ";
-                cin.getline(n, 20);
+                std::string n;
+                std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Passenger Name :-> ";
+                std::getline(std::cin,n);
                 setName(n);
                 tempFileStream.write((char *)this, sizeof(*this));
 
@@ -283,11 +280,11 @@ void Ticket::editTicket()
 
         if (chk == 1)
         {
-            cout << "\n\t\t\t\t\t\t\t\t\t\tTicket Updated Successfully...!!\n";
+            std::cout << "\n\t\t\t\t\t\t\t\t\t\tTicket Updated Successfully...!!\n";
         }
         else
         {
-            cout << "\n\t\t\t\t\t\t\t\t\t\tTicket Not Found...!!\n";
+            std::cout << "\n\t\t\t\t\t\t\t\t\t\tTicket Not Found...!!\n";
         }
 
         ticketFileStream.close();
@@ -302,23 +299,23 @@ void Ticket::showTicketsByPNR()
 {
     system("cls");
 
-    std::string<char, 10>pnr;
+    std::string pnr;
     int chk = 0;
-    fstream ticketFileStream;
+    std::fstream ticketFileStream;
 
     printHeading("SHOW BOOKINGS BY PNR");
-    cout << "\n\t\t\t\t\t\t\t\t\t\tEnter PNR Number:-> ";
-    cin.ignore();
-    cin.getline(pnr, 10);
+    std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter PNR Number:-> ";
+    std::cin.ignore();
+    std::getline(std::cin,pnr);
 
     system("cls");
 
     printHeading("BOOKINGS");
 
-    ticketFileStream.open("tickets.txt", ios::in | ios::app | ios::binary);
+    ticketFileStream.open("tickets.txt", std::ios::in | std::ios::app | std::ios::binary);
     if (ticketFileStream.fail())
     {
-        cout << "\n\t\t\t\t\t\t\t\t\t\tCan't Open File...!!\n";
+        std::cout << "\n\t\t\t\t\t\t\t\t\t\tCan't Open File...!!\n";
     }
 
     else
@@ -326,7 +323,7 @@ void Ticket::showTicketsByPNR()
         ticketFileStream.read((char *)this, sizeof(*this));
         while (!ticketFileStream.eof())
         {
-            if (strcmp(getPnrNo(), pnr) == 0)
+            if (getPnrNo().compare(pnr) == 0)
             {
                 displayTicket();
                 chk = 1;
@@ -335,7 +332,7 @@ void Ticket::showTicketsByPNR()
         }
         if (chk == 0)
         {
-            cout << "\n\t\t\t\t\t\t\t\t\t\tNo Bookings...!!\n";
+            std::cout << "\n\t\t\t\t\t\t\t\t\t\tNo Bookings...!!\n";
         }
         ticketFileStream.close();
     }
@@ -346,23 +343,23 @@ void Ticket::showTicketsByName()
 {
     system("cls");
 
-    std::string<char, 20>n;
+    std::string n;
     int chk = 0;
-    fstream ticketFileStream;
+    std::fstream ticketFileStream;
 
     printHeading("SHOW BOOKINGS BY NAME");
-    cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Passenger Name:-> ";
-    cin.ignore();
-    cin.getline(n, 20);
+    std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Passenger Name:-> ";
+    std::cin.ignore();
+    std::getline(std::cin,n);
 
     system("cls");
 
     printHeading("BOOKINGS");
 
-    ticketFileStream.open("tickets.txt", ios::in | ios::app | ios::binary);
+    ticketFileStream.open("tickets.txt", std::ios::in | std::ios::app | std::ios::binary);
     if (ticketFileStream.fail())
     {
-        cout << "\n\t\t\t\t\t\t\t\t\t\tCan't Open File...!!\n";
+        std::cout << "\n\t\t\t\t\t\t\t\t\t\tCan't Open File...!!\n";
     }
 
     else
@@ -370,7 +367,7 @@ void Ticket::showTicketsByName()
         ticketFileStream.read((char *)this, sizeof(*this));
         while (!ticketFileStream.eof())
         {
-            if (strcmpi(getName(), n) == 0)
+            if (getName()== n)
             {
                 displayTicket();
                 chk = 1;
@@ -379,7 +376,7 @@ void Ticket::showTicketsByName()
         }
         if (chk == 0)
         {
-            cout << "\n\t\t\t\t\t\t\t\t\t\tNo Bookings...!!\n";
+            std::cout << "\n\t\t\t\t\t\t\t\t\t\tNo Bookings...!!\n";
         }
         ticketFileStream.close();
     }
@@ -390,23 +387,23 @@ void Ticket::showTicketsByBus()
 {
     system("cls");
 
-    std::string<char, 10>bNo;
+    std::string bNo;
     int chk = 0;
-    fstream ticketFileStream;
+    std::fstream ticketFileStream;
 
     printHeading("SHOW BOOKINGS BY NAME");
-    cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Bus Number:-> ";
-    cin.ignore();
-    cin.getline(bNo, 10);
+    std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Bus Number:-> ";
+    std::cin.ignore();
+    std::getline(std::cin,bNo);
 
     system("cls");
 
     printHeading("BOOKINGS");
 
-    ticketFileStream.open("tickets.txt", ios::in | ios::app | ios::binary);
+    ticketFileStream.open("tickets.txt", std::ios::in | std::ios::app | std::ios::binary);
     if (ticketFileStream.fail())
     {
-        cout << "\n\t\t\t\t\t\t\t\t\t\tCan't Open File...!!\n";
+        std::cout << "\n\t\t\t\t\t\t\t\t\t\tCan't Open File...!!\n";
     }
 
     else
@@ -414,7 +411,7 @@ void Ticket::showTicketsByBus()
         ticketFileStream.read((char *)this, sizeof(*this));
         while (!ticketFileStream.eof())
         {
-            if (strcmp(bus.getBusNo(), bNo) == 0)
+            if (bus.getBusNo().compare(bNo) == 0)
             {
                 displayTicket();
                 chk = 1;
@@ -423,7 +420,7 @@ void Ticket::showTicketsByBus()
         }
         if (chk == 0)
         {
-            cout << "\n\t\t\t\t\t\t\t\t\t\tNo Bookings...!!\n";
+            std::cout << "\n\t\t\t\t\t\t\t\t\t\tNo Bookings...!!\n";
         }
         ticketFileStream.close();
     }
@@ -434,23 +431,23 @@ void Ticket::showTicketsBySource()
 {
     system("cls");
 
-    std::string<char, 20>s;
+    std::string s;
     int chk = 0;
-    fstream ticketFileStream;
+    std::fstream ticketFileStream;
 
     printHeading("SHOW BOOKINGS BY SOURCE");
-    cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Source:-> ";
-    cin.ignore();
-    cin.getline(s, 20);
+    std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Source:-> ";
+    std::cin.ignore();
+    std::getline(std::cin,s);
 
     system("cls");
 
     printHeading("BOOKINGS");
 
-    ticketFileStream.open("tickets.txt", ios::in | ios::app | ios::binary);
+    ticketFileStream.open("tickets.txt", std::ios::in | std::ios::app | std::ios::binary);
     if (ticketFileStream.fail())
     {
-        cout << "\n\t\t\t\t\t\t\t\t\t\tCan't Open File...!!\n";
+        std::cout << "\n\t\t\t\t\t\t\t\t\t\tCan't Open File...!!\n";
     }
 
     else
@@ -458,7 +455,7 @@ void Ticket::showTicketsBySource()
         ticketFileStream.read((char *)this, sizeof(*this));
         while (!ticketFileStream.eof())
         {
-            if (strcmpi(bus.getSource(), s) == 0)
+            if (bus.getSource() == s)
             {
                 displayTicket();
                 chk = 1;
@@ -467,7 +464,7 @@ void Ticket::showTicketsBySource()
         }
         if (chk == 0)
         {
-            cout << "\n\t\t\t\t\t\t\t\t\t\tNo Bookings...!!\n";
+            std::cout << "\n\t\t\t\t\t\t\t\t\t\tNo Bookings...!!\n";
         }
         ticketFileStream.close();
     }
@@ -478,23 +475,23 @@ void Ticket::showTicketsByDestination()
 {
     system("cls");
 
-    std::string<char, 20>d;
+    std::string d;
     int chk = 0;
-    fstream ticketFileStream;
+    std::fstream ticketFileStream;
 
     printHeading("SHOW BOOKINGS BY DESTINATION");
-    cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Destination:-> ";
-    cin.ignore();
-    cin.getline(d, 20);
+    std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Destination:-> ";
+    std::cin.ignore();
+    std::getline(std::cin,d);
 
     system("cls");
 
     printHeading("BOOKINGS");
 
-    ticketFileStream.open("tickets.txt", ios::in | ios::app | ios::binary);
+    ticketFileStream.open("tickets.txt", std::ios::in | std::ios::app | std::ios::binary);
     if (ticketFileStream.fail())
     {
-        cout << "\n\t\t\t\t\t\t\t\t\t\tCan't Open File...!!\n";
+        std::cout << "\n\t\t\t\t\t\t\t\t\t\tCan't Open File...!!\n";
     }
 
     else
@@ -502,7 +499,7 @@ void Ticket::showTicketsByDestination()
         ticketFileStream.read((char *)this, sizeof(*this));
         while (!ticketFileStream.eof())
         {
-            if (strcmpi(bus.getDestination(), d) == 0)
+            if (bus.getDestination() == d)
             {
                 displayTicket();
                 chk = 1;
@@ -511,7 +508,7 @@ void Ticket::showTicketsByDestination()
         }
         if (chk == 0)
         {
-            cout << "\n\t\t\t\t\t\t\t\t\t\tNo Bookings...!!\n";
+            std::cout << "\n\t\t\t\t\t\t\t\t\t\tNo Bookings...!!\n";
         }
         ticketFileStream.close();
     }
@@ -522,16 +519,16 @@ void Ticket::showAllTickets()
 {
     system("cls");
 
-    fstream ticketFileStream;
+    std::fstream ticketFileStream;
 
     system("cls");
 
     printHeading("BOOKINGS");
 
-    ticketFileStream.open("tickets.txt", ios::in | ios::app | ios::binary);
+    ticketFileStream.open("tickets.txt", std::ios::in | std::ios::app | std::ios::binary);
     if (ticketFileStream.fail())
     {
-        cout << "\n\t\t\t\t\t\t\t\t\t\tCan't Open File...!!\n";
+        std::cout << "\n\t\t\t\t\t\t\t\t\t\tCan't Open File...!!\n";
     }
 
     else
