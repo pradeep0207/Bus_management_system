@@ -2,12 +2,14 @@
 #define UTILS_H
 
 #include <cstdlib>
-#include <string>
 #include <ctime>
+#include <iostream>
+#include <random>
+#include <string>
 
-namespace std;
+using namespace std;
 
-void printHeading(string header)
+void printHeading(const std::string& header)
 {
     cout << "\n\n\n\n";
     cout << "\t\t\t\t\t\t\t\t\t\t==========================================================\n";
@@ -15,17 +17,13 @@ void printHeading(string header)
     cout << "\t\t\t\t\t\t\t\t\t\t==========================================================\n\n";
 }
 
-string generatePNR(int n)
+std::string generatePNR(int n)
 {
-    srand(time(0));
+    std::srand(std::time(0)); // Seed the random number generator
 
-    string pnr;
+    int randomNo = std::rand() % n;
 
-    int randomNo = rand() % n;
-
-    pnr = "PNR" + to_string(randomNo);
-
-    return pnr;
+    return "PNR" + std::to_string(randomNo);
 }
 
 string getCurrentDate()
