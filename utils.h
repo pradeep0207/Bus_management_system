@@ -29,14 +29,24 @@ std::string generatePNR(int n)
 
 std::string getCurrentDate()
 {
+     // Get the current time point
     auto now = std::chrono::system_clock::now();
 
-    std::time_t t = std::chrono::system_clock::to_time_t(now);
+    // Extract the date components
+    auto time = std::chrono::system_clock::to_time_t(now);
+    struct tm tmInfo;
+    
+    #ifdef _WIN32
+    localtime_s(&tmInfo, &time); // Windows version of localtime_r
+    #else
+    localtime_r(&time, &tmInfo); // POSIX version of localtime_r
+    #endif
 
-    std::tm tPtr = *std::localtime(&t);
+    // Format the date as "dd-mm-yyyy"
+    std::string formattedDate = std::to_string(tmInfo.tm_mday) + "-" +
+                                std::to_string(tmInfo.tm_mon + 1) + "-" +
+                                std::to_string(tmInfo.tm_year + 1900);
 
-    std::strftime(buffer, sizeof(buffer), "%d-%m-%Y", &tPtr);
-
-    return std::string(buffer);
+    return formattedDate;
 }
 #endif
