@@ -22,7 +22,7 @@ std::string generatePNR(int n)
     std::uniform_int_distribution<int> dis(0, n - 1);
 
     // Generate a random number
-    int randomNo = n+100;;
+    int randomNo = n+100;
 
     return "PNR" + std::to_string(randomNo);
 }
