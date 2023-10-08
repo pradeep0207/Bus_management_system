@@ -20,19 +20,20 @@ void printHeading(const std::string& header)
 
 std::string generatePNR(int n)
 {
-    std::srand(std::time(0)); // Seed the random number generator
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<int> dis(0, n - 1);
 
-    int randomNo = std::rand() % n;
+    // Generate a random number
+    int randomNo = dis(gen);
 
     return "PNR" + std::to_string(randomNo);
 }
 
 std::string getCurrentDate()
 {
-     // Get the current time point
     auto now = std::chrono::system_clock::now();
 
-    // Extract the date components
     auto time = std::chrono::system_clock::to_time_t(now);
     struct tm tmInfo;
     
@@ -42,7 +43,6 @@ std::string getCurrentDate()
     localtime_r(&time, &tmInfo); // POSIX version of localtime_r
     #endif
 
-    // Format the date as "dd-mm-yyyy"
     std::string formattedDate = std::to_string(tmInfo.tm_mday) + "-" +
                                 std::to_string(tmInfo.tm_mon + 1) + "-" +
                                 std::to_string(tmInfo.tm_year + 1900);
