@@ -10,20 +10,20 @@ private:
     int maxSeats=32;
     int bookedSeats=0;
     double busFare=0.0;
-    std::string<int, 10> busNo;
-    std::string<int, 20> source;
-    std::string<int, 20>destination;
-    std::string<int, 20>sourceTime;
-    std::string<int, 20>destinationTime;
+    std::string busNo;
+    std::string source;
+    std::string destination;
+    std::string sourceTime;
+    std::string destinationTime;
 
 public:
     Bus()
     {
-        strcpy(busNo, "");
-        strcpy(source, "");
-        strcpy(destination, "");
-        strcpy(sourceTime, "");
-        strcpy(destinationTime, "");
+        std::string busNo= "";
+        std::string source= "";
+        std::string destination= "";
+        std::string sourceTime ="";
+        std::string destinationTime= "";
     }
 
     // METHODS
@@ -35,28 +35,27 @@ public:
     void editBus();
 
     // GETTERS
-    char *getBusNo()
+    std::string getBusNo()
     {
         return busNo;
     }
 
-    char *getSource()
+    std::string getSource()
     {
-
         return source;
     }
 
-    char *getDestination()
+    std::string getDestination()
     {
         return destination;
     }
 
-    char *getSourceTime()
+    std::string getSourceTime()
     {
         return sourceTime;
     }
 
-    char *getDestinationTime()
+    std::string getDestinationTime()
     {
         return destinationTime;
     }
@@ -87,28 +86,28 @@ public:
         bookedSeats--;
     }
 
-    void setSource(char *s)
+    void setSource(const std::string& s)
     {
-        if (s && s[0])
-            strcpy(source, s);
+        if (!s.empty())
+            std::string source= s;
     }
 
-    void setDestination(char *d)
+    void setDestination(const std::string& d)
     {
-        if (d && d[0])
-            strcpy(destination, d);
+        if (!d.empty())
+            std::string destination= d;
     }
 
-    void setSourceTime(char *s)
+    void setSourceTime(const std::string& s)
     {
-        if (s && s[0])
-            strcpy(sourceTime, s);
+        if (!s.empty())
+            std::string sourceTime= s;
     }
 
-    void setDestinationTime(char *d)
+    void setDestinationTime(const std::string& d)
     {
-        if (d && d[0])
-            strcpy(destinationTime, d);
+        if (!d.empty())
+            std::string destinationTime= d;
     }
 
     void setBusFare(double f)
