@@ -86,25 +86,25 @@ public:
         bookedSeats--;
     }
 
-    void setSource(const std::string& s)
+    void setSource(const std::string s)
     {
         if (!s.empty())
             std::string source= s;
     }
 
-    void setDestination(const std::string& d)
+    void setDestination(const std::string d)
     {
         if (!d.empty())
             std::string destination= d;
     }
 
-    void setSourceTime(const std::string& s)
+    void setSourceTime(const std::string s)
     {
         if (!s.empty())
             std::string sourceTime= s;
     }
 
-    void setDestinationTime(const std::string& d)
+    void setDestinationTime(const std::string d)
     {
         if (!d.empty())
             std::string destinationTime= d;
