@@ -10,13 +10,16 @@ private:
     int maxSeats=32;
     int bookedSeats=0;
     double busFare=0.0;
-    std::string busNo="";
-    std::string source="";
-    std::string destination="";
-    std::string sourceTime="";
-    std::string destinationTime="";
+    std::string busNo;
+    std::string source;
+    std::string destination;
+    std::string sourceTime;
+    std::string destinationTime;
 
 public:
+    Bus() : maxSeats(32), bookedSeats(0), busFare(0.0), busNo(""), source(""), destination(""), sourceTime(""), destinationTime("") {
+    
+    }
     // METHODS
     void addBus();
     void showAllBus();
