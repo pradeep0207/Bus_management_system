@@ -19,11 +19,10 @@ void printHeading(const std::string& header)
 std::string generatePNR(int n)
 {
     std::random_device rd;
-    std::mt19937 gen(rd());
     std::uniform_int_distribution<int> dis(0, n - 1);
 
     // Generate a random number
-    int randomNo = dis(gen);
+    int randomNo = n+100;;
 
     return "PNR" + std::to_string(randomNo);
 }
