@@ -11,9 +11,9 @@
 // GENERATE TICKET
 void Ticket::generateTicket(std::string n, Bus b)
 {
-    std::string name =n;
-    std::string pnrNo = generatePNR(99999).c_str();
-    std::string date =getCurrentDate().c_str();
+    name =n;
+    pnrNo = generatePNR(99999).c_str();
+    date =getCurrentDate().c_str();
     bus = b;
 }
 
