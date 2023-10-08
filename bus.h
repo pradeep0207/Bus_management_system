@@ -19,7 +19,7 @@ private:
     std::string<int, 20>destinationTime;
 
 public:
-    Bus()
+    Bus(int a=32,int b=0,double c=0.0)
     {
         strcpy(busNo, "");
         maxSeats=32;
