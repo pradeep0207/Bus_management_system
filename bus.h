@@ -10,7 +10,7 @@ private:
     int maxSeats=32;
     int bookedSeats=0;
     double busFare=0.0;
-    std::string bNo;
+    std::string busNo;
     std::string source;
     std::string destination;
     std::string sourceTime;
@@ -19,11 +19,11 @@ private:
 public:
     Bus()
     {
-        std::string bNo= "";
-        std::string source= "";
-        std::string destination= "";
-        std::string sourceTime ="";
-        std::string destinationTime= "";
+        busNo= "";
+        source= "";
+        destination= "";
+        sourceTime ="";
+        destinationTime= "";
     }
 
     // METHODS
@@ -37,7 +37,7 @@ public:
     // GETTERS
     std::string getBusNo()
     {
-        return bNo;
+        return busNo;
     }
 
     std::string getSource()
@@ -86,28 +86,28 @@ public:
         bookedSeats--;
     }
 
-    void setSource(const std::string s)
+    void setSource(const std::string& s)
     {
         if (!s.empty())
-            std::string source= s;
+            source= s;
     }
 
-    void setDestination(const std::string d)
+    void setDestination(const std::string& d)
     {
         if (!d.empty())
-            std::string destination= d;
+            destination= d;
     }
 
-    void setSourceTime(const std::string s)
+    void setSourceTime(const std::string& s)
     {
         if (!s.empty())
-            std::string sourceTime= s;
+            sourceTime= s;
     }
 
-    void setDestinationTime(const std::string d)
+    void setDestinationTime(const std::string& d)
     {
         if (!d.empty())
-            std::string destinationTime= d;
+            destinationTime= d;
     }
 
     void setBusFare(double f)
