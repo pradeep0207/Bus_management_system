@@ -10,7 +10,7 @@ private:
     int maxSeats=32;
     int bookedSeats=0;
     double busFare=0.0;
-    std::string busNo;
+    std::string bNo;
     std::string source;
     std::string destination;
     std::string sourceTime;
@@ -19,7 +19,7 @@ private:
 public:
     Bus()
     {
-        std::string busNo= "";
+        std::string bNo= "";
         std::string source= "";
         std::string destination= "";
         std::string sourceTime ="";
@@ -37,7 +37,7 @@ public:
     // GETTERS
     std::string getBusNo()
     {
-        return busNo;
+        return bNo;
     }
 
     std::string getSource()
