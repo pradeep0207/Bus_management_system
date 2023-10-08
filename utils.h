@@ -8,8 +8,6 @@
 #include <string>
 #include <chrono>
 
-using namespace std;
-
 void printHeading(const std::string& header)
 {
     cout << "\n\n\n\n";
