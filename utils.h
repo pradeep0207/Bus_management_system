@@ -36,7 +36,7 @@ std::string getCurrentDate()
 
     auto time = std::chrono::system_clock::to_time_t(now);
     struct tm tmInfo;
-    
+
     #ifdef _WIN32
     localtime_s(&tmInfo, &time); // Windows version of localtime_r
     #else
