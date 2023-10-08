@@ -17,15 +17,6 @@ private:
     std::string destinationTime="";
 
 public:
-    Bus()
-    {
-        busNo= "";
-        source= "";
-        destination= "";
-        sourceTime ="";
-        destinationTime= "";
-    }
-
     // METHODS
     void addBus();
     void showAllBus();
