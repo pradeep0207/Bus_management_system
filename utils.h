@@ -10,10 +10,10 @@
 
 void printHeading(const std::string& header)
 {
-    cout << "\n\n\n\n";
-    cout << "\t\t\t\t\t\t\t\t\t\t==========================================================\n";
-    cout << "\t\t\t\t\t\t\t\t\t\t                       " << header << "                     \n";
-    cout << "\t\t\t\t\t\t\t\t\t\t==========================================================\n\n";
+    std::cout << "\n\n\n\n";
+    std::cout << "\t\t\t\t\t\t\t\t\t\t==========================================================\n";
+    std::cout << "\t\t\t\t\t\t\t\t\t\t                       " << header << "                     \n";
+    std::cout << "\t\t\t\t\t\t\t\t\t\t==========================================================\n\n";
 }
 
 std::string generatePNR(int n)
