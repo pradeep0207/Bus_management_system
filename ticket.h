@@ -44,7 +44,7 @@ public:
     }
 
     // SETTERS
-    void setName(std::string& n)
+    void setName(std::string n)
     {
         if (!n.empty())
             name= n;
