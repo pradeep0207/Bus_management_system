@@ -22,9 +22,9 @@ public:
     Bus(int a=32,int b=0,double c=0.0)
     {
         strcpy(busNo, "");
-        maxSeats=32;
-        bookedSeats=0;
-        busFare=0.0
+        maxSeats=a;
+        bookedSeats=b;
+        busFare=c;
         strcpy(source, "");
         strcpy(destination, "");
         strcpy(sourceTime, "");
