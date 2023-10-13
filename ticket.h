@@ -9,13 +9,11 @@
 class Ticket
 {
 private:
-    std::string name="";
-    std::string pnrNo="";
-    std::string date="";
+    char name[20], pnrNo[10], date[20];
     Bus bus;
 
 public:
-    void generateTicket(std::string n, Bus);
+    void generateTicket(char *, Bus);
     void displayTicket();
     void bookTicket();
     void cancelTicket();
@@ -28,26 +26,26 @@ public:
     void showAllTickets();
 
     // GETTERS
-    std::string getName()
+    char *getName()
     {
         return name;
     }
 
-    std::string getPnrNo()
+    char *getPnrNo()
     {
         return pnrNo;
     }
 
-    std::string getDate()
+    char *getDate()
     {
         return date;
     }
 
     // SETTERS
-    void setName(const std::string &n)const
+    void setName(char *n)
     {
-        if (!n.empty())
-            name= n;
+        if (n && n[0])
+            strcpy(name, n);
     }
 };
 #endif // !TICKET_H
