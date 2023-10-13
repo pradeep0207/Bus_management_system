@@ -6,20 +6,20 @@
 using namespace std;
 
 // CLASS BUS
-class Bus
+class rail
 {
 private:
     int maxSeats, bookedSeats;
-    double busFare;
-    char busNo[10], source[20], destination[20], sourceTime[20], destinationTime[20];
+    double railFare;
+    char railNo[10], source[20], destination[20], sourceTime[20], destinationTime[20];
 
 public:
     Bus()
     {
-        strcpy(busNo, "");
+        strcpy(railNo, "");
         maxSeats = 32;
         bookedSeats = 0;
-        busFare = 0.0;
+        railFare = 0.0;
         strcpy(source, "");
         strcpy(destination, "");
         strcpy(sourceTime, "");
