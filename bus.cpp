@@ -8,50 +8,52 @@
 #include "ticket.h"
 #include "utils.h"
 
+using namespace std;
+
 // ADD BUS
 void Bus::addBus()
 {
-    std::fstream busFileStream;
+    fstream busFileStream;
 
     system("cls");
 
     printHeading("ADD BUS");
 
-    std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Bus Number:-> ";
-    std::cin.ignore();
-    std::getline(std::cin, busNo);
-    std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Source:-> ";
-    std::getline(std::cin,source);
-    std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Destination:-> ";
-    std::getline(std::cin,destination);
-    std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Source Time:-> ";
-    std::getline(std::cin,sourceTime);
-    std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Destination Time:-> ";
-    std::getline(std::cin,destinationTime);
-    std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Bus Fare:-> ";
-    std::cin >> busFare;
+    cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Bus Number:-> ";
+    cin.ignore();
+    cin.getline(busNo, 10);
+    cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Source:-> ";
+    cin.getline(source, 20);
+    cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Destination:-> ";
+    cin.getline(destination, 20);
+    cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Source Time:-> ";
+    cin.getline(sourceTime, 20);
+    cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Destination Time:-> ";
+    cin.getline(destinationTime, 20);
+    cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Bus Fare:-> ";
+    cin >> busFare;
 
-    busFileStream.open("buses.txt", std::ios::out | std::ios::app | std::ios::binary);
+    busFileStream.open("buses.dat", ios::out | ios::app | ios::binary);
     busFileStream.write((char *)this, sizeof(*this));
     busFileStream.close();
 
-    std::cout << "\n\t\t\t\t\t\t\t\t\t\tBus Added Successfully...!!!:-> \n";
+    cout << "\n\t\t\t\t\t\t\t\t\t\tBus Added Successfully...!!!:-> \n";
 }
 
 // SHOW BUS DETAILS
 void Bus::showBusDetails()
 {
-    std::cout << "\t\t\t\t\t\t\t\t\t\t-------------------------------------------------\n";
-    std::cout << "\t\t\t\t\t\t\t\t\t\t Bus No:-> " << getBusNo();
-    std::cout << "\n\t\t\t\t\t\t\t\t\t\t Source:-> " << getSource();
-    std::cout << "\n\t\t\t\t\t\t\t\t\t\t Destination:-> " << getDestination();
-    std::cout << "\n\t\t\t\t\t\t\t\t\t\t Time:-> " << getSourceTime() << " - " << getDestinationTime();
-    std::cout << "\n\t\t\t\t\t\t\t\t\t\t Total Seats:-> " << getMaxSeats();
-    std::cout << "\n\t\t\t\t\t\t\t\t\t\t Seats Remaining:-> " << (getMaxSeats() - getBookedSeats());
-    std::cout << std::fixed << std::setprecision(2);
-    std::cout << "\n\t\t\t\t\t\t\t\t\t\t Bus Fare:-> " << getBusFare();
-    std::cout << "\n\t\t\t\t\t\t\t\t\t\t-------------------------------------------------\n";
-    std::cout << "\n";
+    cout << "\t\t\t\t\t\t\t\t\t\t-------------------------------------------------\n";
+    cout << "\t\t\t\t\t\t\t\t\t\t Bus No:-> " << getBusNo();
+    cout << "\n\t\t\t\t\t\t\t\t\t\t Source:-> " << getSource();
+    cout << "\n\t\t\t\t\t\t\t\t\t\t Destination:-> " << getDestination();
+    cout << "\n\t\t\t\t\t\t\t\t\t\t Time:-> " << getSourceTime() << " - " << getDestinationTime();
+    cout << "\n\t\t\t\t\t\t\t\t\t\t Total Seats:-> " << getMaxSeats();
+    cout << "\n\t\t\t\t\t\t\t\t\t\t Seats Remaining:-> " << (getMaxSeats() - getBookedSeats());
+    cout << fixed << setprecision(2);
+    cout << "\n\t\t\t\t\t\t\t\t\t\t Bus Fare:-> " << getBusFare();
+    cout << "\n\t\t\t\t\t\t\t\t\t\t-------------------------------------------------\n";
+    cout << "\n";
 }
 
 // VIEW ALL BUS INFO
@@ -59,11 +61,11 @@ void Bus::showAllBus()
 {
     system("cls");
 
-    std::fstream busFileStream;
+    fstream busFileStream;
 
-    busFileStream.open("buses.txt", std::ios::in | std::ios::app | std::ios::binary);
+    busFileStream.open("buses.dat", ios::in | ios::app | ios::binary);
     if (!busFileStream)
-        std::cout << "\n\t\t\t\tFile Not Found...!!!";
+        cout << "\n\t\t\t\tFile Not Found...!!!";
     else
     {
         printHeading("BUSES");
@@ -84,22 +86,22 @@ void Bus::viewBusDetails()
 {
     system("cls");
 
-    std::string bNo= "";
+    char bNo[10];
     int chk = 0;
-    std::fstream busFileStream;
+    fstream busFileStream;
 
     printHeading("VIEW BUS INFO");
-    std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Bus Number:-> ";
-    std::cin.ignore();
-    std::getline(std::cin,bNo);
+    cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Bus Number:-> ";
+    cin.ignore();
+    cin.getline(bNo, 10);
 
     system("cls");
     printHeading("BUS INFO");
 
-    busFileStream.open("buses.txt", std::ios::in | std::ios::app | std::ios::binary);
+    busFileStream.open("buses.dat", ios::in | ios::app | ios::binary);
     if (busFileStream.fail())
     {
-        std::cout << "\n\t\t\t\t\t\t\t\t\t\tCan't Open File...!!\n";
+        cout << "\n\t\t\t\t\t\t\t\t\t\tCan't Open File...!!\n";
     }
 
     else
@@ -107,7 +109,7 @@ void Bus::viewBusDetails()
         busFileStream.read((char *)this, sizeof(*this));
         while (!busFileStream.eof())
         {
-            if (getBusNo().compare(bNo) == 0)
+            if (strcmp(getBusNo(), bNo) == 0)
             {
                 showBusDetails();
                 chk = 1;
@@ -116,7 +118,7 @@ void Bus::viewBusDetails()
         }
         if (chk == 0)
         {
-            std::cout << "\n\t\t\t\t\t\t\t\t\t\tBus Not Found...!!\n";
+            cout << "\n\t\t\t\t\t\t\t\t\t\tBus Not Found...!!\n";
         }
         busFileStream.close();
     }
@@ -127,53 +129,49 @@ void Bus::editBus()
 {
     system("cls");
 
-    std::string bNo="";
+    char bNo[10];
     int chk = 0;
 
-    std::fstream busFileStream;
-    std::fstream tempFileStream;
+    fstream busFileStream, tempFileStream;
 
     printHeading("EDIT BUS");
-    std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Bus Number:-> ";
-    std::cin.ignore();
-    std::getline(std::cin,bNo);
+    cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Bus Number:-> ";
+    cin.ignore();
+    cin.getline(bNo, 10);
 
-    busFileStream.open("buses.txt", std::ios::in | std::ios::app | std::ios::binary);
+    busFileStream.open("buses.dat", ios::in | ios::app | ios::binary);
 
     if (busFileStream.fail())
     {
-        std::cout << "\n\t\t\t\t\t\t\t\t\t\tCan't Open File...!!\n";
+        cout << "\n\t\t\t\t\t\t\t\t\t\tCan't Open File...!!\n";
     }
 
     else
     {
-        tempFileStream.open("temp.txt", std::ios::out | std::ios::app | std::ios::binary);
+        tempFileStream.open("temp.dat", ios::out | ios::app | ios::binary);
 
         busFileStream.read((char *)this, sizeof(*this));
         while (!busFileStream.eof())
         {
-            if (getBusNo().compare(bNo) == 0)
+            if (strcmp(getBusNo(), bNo) == 0)
             {
                 system("cls");
                 printHeading("EDIT BUS");
 
                 showBusDetails();
-
-                std::string s="";
-                std::string d="";
-                std::string sTime="";
-                std::string dTime="";
+                char s[20], d[20], sTime[20], dTime[20];
                 double fare;
-                std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Source:-> ";
-                std::getline(std::cin,s);
-                std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Destination:-> ";
-                std::getline(std::cin,d);
-                std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Source Time:-> ";
-                std::getline(std::cin,sTime);
-                std::getline(std::cin,dTime);
-                std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Bus Fare:-> ";
-                std::cin.ignore();
-                std::cin >> fare;
+                cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Source:-> ";
+                cin.getline(s, 20);
+                cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Destination:-> ";
+                cin.getline(d, 20);
+                cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Source Time:-> ";
+                cin.getline(sTime, 20);
+                cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Destination Time:-> ";
+                cin.getline(dTime, 20);
+                cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Bus Fare:-> ";
+                cin.ignore();
+                cin >> fare;
                 setSource(s);
                 setDestination(d);
                 setSourceTime(sTime);
@@ -190,19 +188,19 @@ void Bus::editBus()
             busFileStream.read((char *)this, sizeof(*this));
         }
 
-        if (chk == 1)
+        if (chk = 1)
         {
-            std::cout << "\n\t\t\t\t\t\t\t\t\t\tBus Updated Successfully...!!\n";
+            cout << "\n\t\t\t\t\t\t\t\t\t\tBus Updated Successfully...!!\n";
         }
         else
         {
-            std::cout << "\n\t\t\t\t\t\t\t\t\t\tBus Not Found...!!\n";
+            cout << "\n\t\t\t\t\t\t\t\t\t\tBus Not Found...!!\n";
         }
 
         busFileStream.close();
         tempFileStream.close();
-        remove("buses.txt");
-        rename("temp.txt", "buses.txt");
+        remove("buses.dat");
+        rename("temp.dat", "buses.dat");
     }
 }
 
@@ -211,31 +209,30 @@ void Bus::deleteBus()
 {
     system("cls");
 
-    std::string bNo="";
+    char bNo[10];
     int chk = 0;
-    std::fstream busFileStream;
-    std::fstream tempFileStream;
+    fstream busFileStream, tempFileStream;
 
     printHeading("DELETE BUS");
-    std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Bus No:-> ";
-    std::cin.ignore();
-    std::getline(std::cin,bNo);
+    cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Bus No:-> ";
+    cin.ignore();
+    cin.getline(bNo, 10);
 
-    busFileStream.open("buses.txt", std::ios::in | std::ios::app | std::ios::binary);
+    busFileStream.open("buses.dat", ios::in | ios::app | ios::binary);
 
     if (busFileStream.fail())
     {
-        std::cout << "\n\\t\t\t\t\t\t\t\t\t\tCan't Open File...!!";
+        cout << "\n\\t\t\t\t\t\t\t\t\t\tCan't Open File...!!";
         system("pause");
     }
 
     else
     {
-        tempFileStream.open("temp.txt", std::ios::out | std::ios::app | std::ios::binary);
+        tempFileStream.open("temp.dat", ios::out | ios::app | ios::binary);
         busFileStream.read((char *)this, sizeof(*this));
         while (!busFileStream.eof())
         {
-            if (getBusNo().compare(bNo) != 0)
+            if (strcmp(getBusNo(), bNo) != 0)
             {
                 tempFileStream.write((char *)this, sizeof(*this));
             }
@@ -248,16 +245,16 @@ void Bus::deleteBus()
 
         if (chk == 0)
         {
-            std::cout << "\n\t\t\t\t\t\t\t\t\t\tBus Not Found...!!\n";
+            cout << "\n\t\t\t\t\t\t\t\t\t\tBus Not Found...!!\n";
         }
         else
         {
-            std::cout << "\n\t\t\t\t\t\t\t\t\t\tBus Deleted...!!\n";
+            cout << "\n\t\t\t\t\t\t\t\t\t\tBus Deleted...!!\n";
         }
 
         busFileStream.close();
         tempFileStream.close();
-        remove("buses.txt");
-        rename("temp.txt", "buses.txt");
+        remove("buses.dat");
+        rename("temp.dat", "buses.dat");
     }
 }
