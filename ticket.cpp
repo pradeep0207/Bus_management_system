@@ -88,21 +88,21 @@ void Ticket::bookTicket()
         }
         else
         {
-            std::string rNo;
+            std::string bNo;
             int booked = 0;
 
-            std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Rail Number:-> ";
+            std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Bus Number:-> ";
             std::getline(std::cin,bNo);
 
-            railFileStream.open("rails.txt", std::ios::in | std::ios::app | std::ios::binary);
+            busFileStream.open("buses.txt", std::ios::in | std::ios::app | std::ios::binary);
             tempFileStream.open("temp.txt", std::ios::out | std::ios::app | std::ios::binary);
 
-            railFileStream.read((char *)&b, sizeof(b));
-            while (!railFileStream.eof())
+            busFileStream.read((char *)&b, sizeof(b));
+            while (!busFileStream.eof())
             {
-                if (r.getSource() == from && r.getDestination() == to && r.getBusNo().compare(rNo) == 0)
+                if (b.getSource() == from && b.getDestination() == to && b.getBusNo().compare(bNo) == 0)
                 {
-                    if (r.getBookedSeats() >= 32)
+                    if (b.getBookedSeats() >= 32)
                     {
                         std::cout << "\n\t\t\t\t\t\t\t\t\t\tSeat not available...!!\n";
                         break;
@@ -114,8 +114,8 @@ void Ticket::bookTicket()
                         std::string n;
                         std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Customer Name :-> ";
                         std::getline(std::cin,n);
-                        r.setBookedSeats();
-                        generateTicket(n, r);
+                        b.setBookedSeats();
+                        generateTicket(n, b);
                         ticketFileStream.open("tickets.txt", std::ios::out | std::ios::app | std::ios::binary);
                         ticketFileStream.write((char *)this, sizeof(*this));
                         ticketFileStream.close();
