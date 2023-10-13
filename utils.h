@@ -2,48 +2,37 @@
 #define UTILS_H
 
 #include <cstdlib>
-#include <ctime>
-#include <iostream>
-#include <random>
 #include <string>
-#include <chrono>
+#include <ctime>
 
-void printHeading(const std::string& header)
+using namespace std;
+
+void printHeading(string header)
 {
-    std::cout << "\n\n\n\n";
-    std::cout << "\t\t\t\t\t\t\t\t\t\t==========================================================\n";
-    std::cout << "\t\t\t\t\t\t\t\t\t\t                       " << header << "                     \n";
-    std::cout << "\t\t\t\t\t\t\t\t\t\t==========================================================\n\n";
+    cout << "\n\n\n\n";
+    cout << "\t\t\t\t\t\t\t\t\t\t==========================================================\n";
+    cout << "\t\t\t\t\t\t\t\t\t\t                       " << header << "                     \n";
+    cout << "\t\t\t\t\t\t\t\t\t\t==========================================================\n\n";
 }
 
-std::string generatePNR(int n)
+string generatePNR(int n)
 {
-    std::random_device rd;
-    std::uniform_int_distribution<int> dis(0, n - 1);
+    srand(time(0));
 
-    // Generate a random number
-    int randomNo = n+100;
+    string pnr;
 
-    return "PNR" + std::to_string(randomNo);
+    int randomNo = rand() % n;
+
+    pnr = "PNR" + to_string(randomNo);
+
+    return pnr;
 }
 
-std::string getCurrentDate()
+string getCurrentDate()
 {
-    auto now = std::chrono::system_clock::now();
+    time_t t = time(NULL);
+    tm *tPtr = localtime(&t);
 
-    auto time = std::chrono::system_clock::to_time_t(now);
-    struct tm tmInfo;
-
-    #ifdef _WIN32
-    localtime_s(&tmInfo, &time); // Windows version of localtime_r
-    #else
-    localtime_r(&time, &tmInfo); // POSIX version of localtime_r
-    #endif
-
-    std::string formattedDate = std::to_string(tmInfo.tm_mday) + "-" +
-                                std::to_string(tmInfo.tm_mon + 1) + "-" +
-                                std::to_string(tmInfo.tm_year + 1900);
-
-    return formattedDate;
+    return to_string(tPtr->tm_mday) + "-" + to_string((tPtr->tm_mon) + 1) + "-" + to_string((tPtr->tm_year) + 1900);
 }
-#endif
+#endif // UTILS_H
