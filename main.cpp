@@ -40,6 +40,12 @@ void welcomeScreen()
     cout << "\t\t\t\t\t\t\t\t\t\t||                    PROJECT                 ||\n";
     cout << "\t\t\t\t\t\t\t\t\t\t================================================\n\n\n";
 
+    cout << "\t\t\t\t\t\t\t\t\t\t-------------------------------------------------\n";
+    cout << "\t\t\t\t\t\t\t\t\t\t\t\t  Developed By:-                             \t\n";
+    cout << "\t\t\t\t\t\t\t\t\t\t\t\t                                             \t\n";
+    cout << "\t\t\t\t\t\t\t\t\t\t\t\t  NIKHIL RAJPUT                              \t\n";
+    cout << "\t\t\t\t\t\t\t\t\t\t-------------------------------------------------\n\n";
+
     system("pause");
     mainMenu();
 }
@@ -49,7 +55,7 @@ void mainMenu()
 {
     int choice;
 
-    while (true)
+    while (1)
     {
         system("cls");
 
@@ -95,8 +101,7 @@ void mainMenu()
 // ADMIN LOGIN
 void adminLogin()
 {
-    string adminUname;
-    string adminPass;
+    string adminUname, adminPass;
 
     system("cls");
 
@@ -125,7 +130,7 @@ void userMenu()
 
     int choice;
 
-    while (true)
+    while (1)
     {
         system("cls");
 
@@ -187,7 +192,7 @@ void adminMenu()
 
     int choice;
 
-    while (true)
+    while (1)
     {
         system("cls");
 
@@ -285,7 +290,7 @@ void viewBookingsMenu()
 
     int choice;
 
-    while (true)
+    while (1)
     {
         system("cls");
 
