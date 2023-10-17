@@ -4,22 +4,21 @@
 #include <fstream>
 #include <iomanip>
 
-#include "bus.h"
+#include "rail.h"
 #include "ticket.h"
 #include "utils.h"
 
-// ADD BUS
-void Bus::addBus()
+void Rail::addRail()
 {
-    std::fstream busFileStream;
+    std::fstream railFileStream;
 
     system("cls");
 
-    printHeading("ADD BUS");
+    printHeading("ADD RAIL");
 
-    std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Bus Number:-> ";
+    std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Rail Number:-> ";
     std::cin.ignore();
-    std::getline(std::cin, busNo);
+    std::getline(std::cin, RailNo);
     std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Source:-> ";
     std::getline(std::cin,source);
     std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Destination:-> ";
@@ -28,119 +27,115 @@ void Bus::addBus()
     std::getline(std::cin,sourceTime);
     std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Destination Time:-> ";
     std::getline(std::cin,destinationTime);
-    std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Bus Fare:-> ";
-    std::cin >> busFare;
+    std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter rail Fare:-> ";
+    std::cin >> RailFare;
 
-    busFileStream.open("buses.txt", std::ios::out | std::ios::app | std::ios::binary);
-    busFileStream.write((char *)this, sizeof(*this));
-    busFileStream.close();
+    railFileStream.open("railes.txt", std::ios::out | std::ios::app | std::ios::binary);
+    railFileStream.write((char *)this, sizeof(*this));
+    railFileStream.close();
 
-    std::cout << "\n\t\t\t\t\t\t\t\t\t\tBus Added Successfully...!!!:-> \n";
+    std::cout << "\n\t\t\t\t\t\t\t\t\t\trail Added Successfully...!!!:-> \n";
 }
 
-// SHOW BUS DETAILS
-void Bus::showBusDetails()
+void Rail::showRailDetails()
 {
     std::cout << "\t\t\t\t\t\t\t\t\t\t-------------------------------------------------\n";
-    std::cout << "\t\t\t\t\t\t\t\t\t\t Bus No:-> " << getBusNo();
+    std::cout << "\t\t\t\t\t\t\t\t\t\t Rail No:-> " << getRailNo();
     std::cout << "\n\t\t\t\t\t\t\t\t\t\t Source:-> " << getSource();
     std::cout << "\n\t\t\t\t\t\t\t\t\t\t Destination:-> " << getDestination();
     std::cout << "\n\t\t\t\t\t\t\t\t\t\t Time:-> " << getSourceTime() << " - " << getDestinationTime();
     std::cout << "\n\t\t\t\t\t\t\t\t\t\t Total Seats:-> " << getMaxSeats();
     std::cout << "\n\t\t\t\t\t\t\t\t\t\t Seats Remaining:-> " << (getMaxSeats() - getBookedSeats());
     std::cout << std::fixed << std::setprecision(2);
-    std::cout << "\n\t\t\t\t\t\t\t\t\t\t Bus Fare:-> " << getBusFare();
+    std::cout << "\n\t\t\t\t\t\t\t\t\t\t Rail Fare:-> " << getRailFare();
     std::cout << "\n\t\t\t\t\t\t\t\t\t\t-------------------------------------------------\n";
     std::cout << "\n";
 }
 
-// VIEW ALL BUS INFO
-void Bus::showAllBus()
+void Rail::showAllRail()
 {
     system("cls");
 
-    std::fstream busFileStream;
+    std::fstream railFileStream;
 
-    busFileStream.open("buses.txt", std::ios::in | std::ios::app | std::ios::binary);
-    if (!busFileStream)
+    railFileStream.open("railes.txt", std::ios::in | std::ios::app | std::ios::binary);
+    if (!railFileStream)
         std::cout << "\n\t\t\t\tFile Not Found...!!!";
     else
     {
-        printHeading("BUSES");
+        printHeading("RailES");
 
-        busFileStream.read((char *)this, sizeof(*this));
+        railFileStream.read((char *)this, sizeof(*this));
 
-        while (!busFileStream.eof())
+        while (!railFileStream.eof())
         {
-            showBusDetails();
-            busFileStream.read((char *)this, sizeof(*this));
+            showRailDetails();
+            railFileStream.read((char *)this, sizeof(*this));
         }
-        busFileStream.close();
+        railFileStream.close();
     }
 }
 
-// VIEW BUS INFO
-void Bus::viewBusDetails()
+void Rail::viewRailDetails()
 {
     system("cls");
 
     std::string bNo= "";
     int chk = 0;
-    std::fstream busFileStream;
+    std::fstream railFileStream;
 
-    printHeading("VIEW BUS INFO");
-    std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Bus Number:-> ";
+    printHeading("VIEW Rail INFO");
+    std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Rail Number:-> ";
     std::cin.ignore();
     std::getline(std::cin,bNo);
 
     system("cls");
-    printHeading("BUS INFO");
+    printHeading("Rail INFO");
 
-    busFileStream.open("buses.txt", std::ios::in | std::ios::app | std::ios::binary);
-    if (busFileStream.fail())
+    railFileStream.open("railes.txt", std::ios::in | std::ios::app | std::ios::binary);
+    if (railFileStream.fail())
     {
         std::cout << "\n\t\t\t\t\t\t\t\t\t\tCan't Open File...!!\n";
     }
 
     else
     {
-        busFileStream.read((char *)this, sizeof(*this));
-        while (!busFileStream.eof())
+        railFileStream.read((char *)this, sizeof(*this));
+        while (!railFileStream.eof())
         {
-            if (getBusNo().compare(bNo) == 0)
+            if (getRailNo().compare(bNo) == 0)
             {
-                showBusDetails();
+                showRailDetails();
                 chk = 1;
             }
-            busFileStream.read((char *)this, sizeof(*this));
+            railFileStream.read((char *)this, sizeof(*this));
         }
         if (chk == 0)
         {
-            std::cout << "\n\t\t\t\t\t\t\t\t\t\tBus Not Found...!!\n";
+            std::cout << "\n\t\t\t\t\t\t\t\t\t\tRail Not Found...!!\n";
         }
-        busFileStream.close();
+        railFileStream.close();
     }
 }
 
-// EDIT BUS
-void Bus::editBus()
+void Rail::editRail()
 {
     system("cls");
 
     std::string bNo="";
     int chk = 0;
 
-    std::fstream busFileStream;
+    std::fstream railFileStream;
     std::fstream tempFileStream;
 
-    printHeading("EDIT BUS");
-    std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Bus Number:-> ";
+    printHeading("EDIT rail");
+    std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Rail Number:-> ";
     std::cin.ignore();
     std::getline(std::cin,bNo);
 
-    busFileStream.open("buses.txt", std::ios::in | std::ios::app | std::ios::binary);
+    railFileStream.open("railes.txt", std::ios::in | std::ios::app | std::ios::binary);
 
-    if (busFileStream.fail())
+    if (railFileStream.fail())
     {
         std::cout << "\n\t\t\t\t\t\t\t\t\t\tCan't Open File...!!\n";
     }
@@ -149,15 +144,15 @@ void Bus::editBus()
     {
         tempFileStream.open("temp.txt", std::ios::out | std::ios::app | std::ios::binary);
 
-        busFileStream.read((char *)this, sizeof(*this));
-        while (!busFileStream.eof())
+        railFileStream.read((char *)this, sizeof(*this));
+        while (!railFileStream.eof())
         {
-            if (getBusNo().compare(bNo) == 0)
+            if (getRailNo().compare(bNo) == 0)
             {
                 system("cls");
-                printHeading("EDIT BUS");
+                printHeading("EDIT rail");
 
-                showBusDetails();
+                showRailDetails();
 
                 std::string s="";
                 std::string d="";
@@ -171,14 +166,14 @@ void Bus::editBus()
                 std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Source Time:-> ";
                 std::getline(std::cin,sTime);
                 std::getline(std::cin,dTime);
-                std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Bus Fare:-> ";
+                std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Rail Fare:-> ";
                 std::cin.ignore();
                 std::cin >> fare;
                 setSource(s);
                 setDestination(d);
                 setSourceTime(sTime);
                 setDestinationTime(dTime);
-                setBusFare(fare);
+                setRailFare(fare);
                 tempFileStream.write((char *)this, sizeof(*this));
 
                 chk = 1;
@@ -187,43 +182,42 @@ void Bus::editBus()
             {
                 tempFileStream.write((char *)this, sizeof(*this));
             }
-            busFileStream.read((char *)this, sizeof(*this));
+            railFileStream.read((char *)this, sizeof(*this));
         }
 
         if (chk == 1)
         {
-            std::cout << "\n\t\t\t\t\t\t\t\t\t\tBus Updated Successfully...!!\n";
+            std::cout << "\n\t\t\t\t\t\t\t\t\t\tRail Updated Successfully...!!\n";
         }
         else
         {
-            std::cout << "\n\t\t\t\t\t\t\t\t\t\tBus Not Found...!!\n";
+            std::cout << "\n\t\t\t\t\t\t\t\t\t\tRail Not Found...!!\n";
         }
 
-        busFileStream.close();
+        railFileStream.close();
         tempFileStream.close();
-        remove("buses.txt");
-        rename("temp.txt", "buses.txt");
+        remove("railes.txt");
+        rename("temp.txt", "railes.txt");
     }
 }
 
-// DELETE BUS
-void Bus::deleteBus()
+void Rail::deleteRail()
 {
     system("cls");
 
     std::string bNo="";
     int chk = 0;
-    std::fstream busFileStream;
+    std::fstream railFileStream;
     std::fstream tempFileStream;
 
-    printHeading("DELETE BUS");
-    std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Bus No:-> ";
+    printHeading("DELETE Rail");
+    std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Rail No:-> ";
     std::cin.ignore();
     std::getline(std::cin,bNo);
 
-    busFileStream.open("buses.txt", std::ios::in | std::ios::app | std::ios::binary);
+    railFileStream.open("railes.txt", std::ios::in | std::ios::app | std::ios::binary);
 
-    if (busFileStream.fail())
+    if (railFileStream.fail())
     {
         std::cout << "\n\\t\t\t\t\t\t\t\t\t\tCan't Open File...!!";
         system("pause");
@@ -232,10 +226,10 @@ void Bus::deleteBus()
     else
     {
         tempFileStream.open("temp.txt", std::ios::out | std::ios::app | std::ios::binary);
-        busFileStream.read((char *)this, sizeof(*this));
-        while (!busFileStream.eof())
+        railFileStream.read((char *)this, sizeof(*this));
+        while (!railFileStream.eof())
         {
-            if (getBusNo().compare(bNo) != 0)
+            if (getRailNo().compare(bNo) != 0)
             {
                 tempFileStream.write((char *)this, sizeof(*this));
             }
@@ -243,21 +237,21 @@ void Bus::deleteBus()
             {
                 chk = 1;
             }
-            busFileStream.read((char *)this, sizeof(*this));
+            railFileStream.read((char *)this, sizeof(*this));
         }
 
         if (chk == 0)
         {
-            std::cout << "\n\t\t\t\t\t\t\t\t\t\tBus Not Found...!!\n";
+            std::cout << "\n\t\t\t\t\t\t\t\t\t\tRail Not Found...!!\n";
         }
         else
         {
-            std::cout << "\n\t\t\t\t\t\t\t\t\t\tBus Deleted...!!\n";
+            std::cout << "\n\t\t\t\t\t\t\t\t\t\tRail Deleted...!!\n";
         }
 
-        busFileStream.close();
+        railFileStream.close();
         tempFileStream.close();
-        remove("buses.txt");
-        rename("temp.txt", "buses.txt");
+        remove("railes.txt");
+        rename("temp.txt", "railes.txt");
     }
 }
