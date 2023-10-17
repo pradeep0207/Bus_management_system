@@ -1,35 +1,34 @@
-#ifndef BUS_H
-#define BUS_H
+#ifndef RAIL_H
+#define RAIL_H
 
 #include <iostream>
 
-// CLASS BUS
-class Bus
+class Rail
 {
 private:
     int maxSeats=32;
     int bookedSeats=0;
-    double busFare=0.0;
-    std::string busNo="";
+    double RailFare=0.0;
+    std::string RailNo="";
     std::string source="";
     std::string destination="";
     std::string sourceTime="";
     std::string destinationTime="";
 
 public:
-    
+
     // METHODS
-    void addBus();
-    void showAllBus();
-    void showBusDetails();
-    void viewBusDetails();
-    void deleteBus();
-    void editBus();
+    void addRail();
+    void showAllRail();
+    void showRailDetails();
+    void viewRailDetails();
+    void deleteRail();
+    void editRail();
 
     // GETTERS
-    std::string getBusNo()
+    std::string getRailNo()
     {
-        return busNo;
+        return RailNo;
     }
 
     std::string getSource()
@@ -62,9 +61,9 @@ public:
         return maxSeats;
     }
 
-    double getBusFare()
+    double getRailFare()
     {
-        return busFare;
+        return RailFare;
     }
 
     // SETTERS
@@ -78,34 +77,34 @@ public:
         bookedSeats--;
     }
 
-    void setSource(const std::string &s) const
+    void setSource(std::string &s)
     {
         if (!s.empty())
             source= s;
     }
 
-    void setDestination(const std::string &d)const
+    void setDestination(std::string &d)
     {
         if (!d.empty())
             destination= d;
     }
 
-    void setSourceTime(const std::string &s) const
+    void setSourceTime(std::string &s)
     {
         if (!s.empty())
             sourceTime= s;
     }
 
-    void setDestinationTime(const std::string &d)const
+    void setDestinationTime(std::string &d)
     {
         if (!d.empty())
             destinationTime= d;
     }
 
-    void setBusFare(double f)
+    void setRailFare(double f)
     {
         if (f)
-            busFare = f;
+            RailFare = f;
     }
 };
-#endif // !BUS_H
+#endif // !RAIL_H
