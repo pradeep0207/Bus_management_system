@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-#include "bus.h"
+#include "rail.h"
 
 // CLASS TICKET
 class Ticket
@@ -12,17 +12,17 @@ private:
     std::string name="";
     std::string pnrNo="";
     std::string date="";
-    Bus bus;
+    Rail rail;
 
 public:
-    void generateTicket(std::string n, Bus);
+    void generateTicket(std::string n, Rail);
     void displayTicket();
     void bookTicket();
     void cancelTicket();
     void editTicket();
     void showTicketsByPNR();
     void showTicketsByName();
-    void showTicketsByBus();
+    void showTicketsByRail();
     void showTicketsBySource();
     void showTicketsByDestination();
     void showAllTickets();
@@ -44,7 +44,7 @@ public:
     }
 
     // SETTERS
-    void setName(const std::string &n)const
+    void setName(std::string &n)
     {
         if (!n.empty())
             name= n;
