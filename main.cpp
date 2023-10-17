@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string.h>
 
-#include "bus.cpp"
+#include "rail.cpp"
 #include "ticket.cpp"
 #include "utils.h"
 
@@ -35,7 +35,7 @@ void welcomeScreen()
     cout << "\t\t\t\t\t\t\t\t\t\t================================================\n";
     cout << "\t\t\t\t\t\t\t\t\t\t||                  WELCOME TO                ||\n";
     cout << "\t\t\t\t\t\t\t\t\t\t||                                            ||\n";
-    cout << "\t\t\t\t\t\t\t\t\t\t||      BUS RESERVATION SYSTEM MANAGEMENT     ||\n";
+    cout << "\t\t\t\t\t\t\t\t\t\t||            RAIL RESERVATION SYSTEM      ||\n";
     cout << "\t\t\t\t\t\t\t\t\t\t||                                            ||\n";
     cout << "\t\t\t\t\t\t\t\t\t\t||                    PROJECT                 ||\n";
     cout << "\t\t\t\t\t\t\t\t\t\t================================================\n\n\n";
@@ -182,7 +182,7 @@ void userMenu()
 // ADMIN MENU FUNCTION
 void adminMenu()
 {
-    Bus b;
+    Rail b;
     Ticket t;
 
     int choice;
@@ -194,9 +194,9 @@ void adminMenu()
         printHeading("ADMIN PORTAL");
 
         cout << "\t\t\t\t\t\t\t\t\t\t-------------------------------------------------\n";
-        cout << "\t\t\t\t\t\t\t\t\t\t 1. Add Bus                                      \n";
+        cout << "\t\t\t\t\t\t\t\t\t\t 1. Add Rail                                     \n";
         cout << "\t\t\t\t\t\t\t\t\t\t-------------------------------------------------\n";
-        cout << "\t\t\t\t\t\t\t\t\t\t 2. View Buses                                   \n";
+        cout << "\t\t\t\t\t\t\t\t\t\t 2. View Railes                                  \n";
         cout << "\t\t\t\t\t\t\t\t\t\t-------------------------------------------------\n";
         cout << "\t\t\t\t\t\t\t\t\t\t 3. Book Ticket                                  \n";
         cout << "\t\t\t\t\t\t\t\t\t\t-------------------------------------------------\n";
@@ -206,11 +206,11 @@ void adminMenu()
         cout << "\t\t\t\t\t\t\t\t\t\t-------------------------------------------------\n";
         cout << "\t\t\t\t\t\t\t\t\t\t 6. View Bookings                                \n";
         cout << "\t\t\t\t\t\t\t\t\t\t-------------------------------------------------\n";
-        cout << "\t\t\t\t\t\t\t\t\t\t 7. View Bus Details                             \n";
+        cout << "\t\t\t\t\t\t\t\t\t\t 7. View Rail Details                             \n";
         cout << "\t\t\t\t\t\t\t\t\t\t-------------------------------------------------\n";
-        cout << "\t\t\t\t\t\t\t\t\t\t 8. Edit Bus                                     \n";
+        cout << "\t\t\t\t\t\t\t\t\t\t 8. Edit Rail                                     \n";
         cout << "\t\t\t\t\t\t\t\t\t\t-------------------------------------------------\n";
-        cout << "\t\t\t\t\t\t\t\t\t\t 9. Delete Bus                                   \n";
+        cout << "\t\t\t\t\t\t\t\t\t\t 9. Delete Rail                                   \n";
         cout << "\t\t\t\t\t\t\t\t\t\t-------------------------------------------------\n";
         cout << "\t\t\t\t\t\t\t\t\t\t 10. BACK                                        \n";
         cout << "\t\t\t\t\t\t\t\t\t\t-------------------------------------------------\n\n";
@@ -222,12 +222,12 @@ void adminMenu()
         switch (choice)
         {
         case 1:
-            b.addBus();
+            b.addRail();
             system("pause");
             break;
 
         case 2:
-            b.showAllBus();
+            b.showAllRail();
             system("pause");
             break;
 
@@ -251,17 +251,17 @@ void adminMenu()
             break;
 
         case 7:
-            b.viewBusDetails();
+            b.viewRailDetails();
             system("pause");
             break;
 
         case 8:
-            b.editBus();
+            b.editRail();
             system("pause");
             break;
 
         case 9:
-            b.deleteBus();
+            b.deleteRail();
             system("pause");
             break;
 
@@ -296,7 +296,7 @@ void viewBookingsMenu()
         cout << "\t\t\t\t\t\t\t\t\t\t-------------------------------------------------\n";
         cout << "\t\t\t\t\t\t\t\t\t\t 2. By Name                                      \n";
         cout << "\t\t\t\t\t\t\t\t\t\t-------------------------------------------------\n";
-        cout << "\t\t\t\t\t\t\t\t\t\t 3. By Bus                                       \n";
+        cout << "\t\t\t\t\t\t\t\t\t\t 3. By RAIL                                       \n";
         cout << "\t\t\t\t\t\t\t\t\t\t-------------------------------------------------\n";
         cout << "\t\t\t\t\t\t\t\t\t\t 4. By Source                                    \n";
         cout << "\t\t\t\t\t\t\t\t\t\t-------------------------------------------------\n";
@@ -324,7 +324,7 @@ void viewBookingsMenu()
             break;
 
         case 3:
-            t.showTicketsByBus();
+            t.showTicketsByRail();
             system("pause");
             break;
 
