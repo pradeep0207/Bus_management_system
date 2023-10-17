@@ -5,16 +5,16 @@
 #include <iomanip>
 
 #include "ticket.h"
-#include "bus.h"
+#include "rail.h"
 #include "utils.h"
 
 // GENERATE TICKET
-void Ticket::generateTicket(std::string n, Bus b)
+void Ticket::generateTicket(std::string n, Rail b)
 {
     name =n;
     pnrNo = generatePNR(99999).c_str();
     date =getCurrentDate().c_str();
-    bus = b;
+    rail = b;
 }
 
 // DISPLAY TICKET DETAILS
@@ -23,15 +23,15 @@ void Ticket::displayTicket()
     std::cout << "\t\t\t\t\t\t\t\t\t\t-------------------------------------------------\n";
     std::cout << "\t\t\t\t\t\t\t\t\t\t Name:-> " << getName();
     std::cout << "\n\t\t\t\t\t\t\t\t\t\t PNR No:-> " << getPnrNo();
-    std::cout << "\n\t\t\t\t\t\t\t\t\t\t Bus No:-> " << bus.getBusNo();
-    std::cout << "\n\t\t\t\t\t\t\t\t\t\t Seat No.:-> " << bus.getBookedSeats();
+    std::cout << "\n\t\t\t\t\t\t\t\t\t\t rail No:-> " << rail.getRailNo();
+    std::cout << "\n\t\t\t\t\t\t\t\t\t\t Seat No.:-> " << rail.getBookedSeats();
     std::cout << "\n\t\t\t\t\t\t\t\t\t\t Date:-> " << getDate();
-    std::cout << "\n\t\t\t\t\t\t\t\t\t\t From:-> " << bus.getSource();
-    std::cout << "\n\t\t\t\t\t\t\t\t\t\t To:-> " << bus.getDestination();
-    std::cout << "\n\t\t\t\t\t\t\t\t\t\t Source Time:-> " << bus.getSourceTime();
-    std::cout << "\n\t\t\t\t\t\t\t\t\t\t Destination Time:-> " << bus.getDestinationTime();
+    std::cout << "\n\t\t\t\t\t\t\t\t\t\t From:-> " << rail.getSource();
+    std::cout << "\n\t\t\t\t\t\t\t\t\t\t To:-> " << rail.getDestination();
+    std::cout << "\n\t\t\t\t\t\t\t\t\t\t Source Time:-> " << rail.getSourceTime();
+    std::cout << "\n\t\t\t\t\t\t\t\t\t\t Destination Time:-> " << rail.getDestinationTime();
     std::cout << std::fixed << std::setprecision(2);
-    std::cout << "\n\t\t\t\t\t\t\t\t\t\t Bus Fare:-> " << bus.getBusFare();
+    std::cout << "\n\t\t\t\t\t\t\t\t\t\t rail Fare:-> " << rail.getRailFare();
     std::cout << "\n\t\t\t\t\t\t\t\t\t\t-------------------------------------------------\n";
     std::cout << "\n";
 }
@@ -46,15 +46,15 @@ void Ticket::bookTicket()
 
     int chk = 0;
 
-    Bus b;
-    std::fstream busFileStream;
+    Rail b;
+    std::fstream railFileStream;
     std::fstream ticketFileStream;
     std::fstream tempFileStream;
 
     printHeading("BOOK TICKET");
 
-    busFileStream.open("buses.txt", std::ios::in | std::ios::app | std::ios::binary);
-    if (busFileStream.fail())
+    railFileStream.open("railes.txt", std::ios::in | std::ios::app | std::ios::binary);
+    if (railFileStream.fail())
     {
         std::cout << "\n\t\t\t\t\t\t\t\t\t\tCan't Open File...!!\n";
     }
@@ -67,40 +67,40 @@ void Ticket::bookTicket()
         std::getline(std::cin,to);
 
         system("cls");
-        printHeading("AVAILABLE BUSES");
+        printHeading("AVAILABLE RAILS");
 
-        busFileStream.read((char *)&b, sizeof(b));
-        while (!busFileStream.eof())
+        railFileStream.read((char *)&b, sizeof(b));
+        while (!railFileStream.eof())
         {
             if (b.getSource() == from && b.getDestination() == to)
             {
-                b.showBusDetails();
+                b.showRailDetails();
                 chk = 1;
             }
-            busFileStream.read((char *)&b, sizeof(b));
+            railFileStream.read((char *)&b, sizeof(b));
         }
 
-        busFileStream.close();
+        railFileStream.close();
 
         if (chk == 0)
         {
-            std::cout << "\n\t\t\t\t\t\t\t\t\t\tNo Buses Found...!!\n";
+            std::cout << "\n\t\t\t\t\t\t\t\t\t\tNo rails Found...!!\n";
         }
         else
         {
             std::string bNo;
             int booked = 0;
 
-            std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Bus Number:-> ";
+            std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter RAIL Number:-> ";
             std::getline(std::cin,bNo);
 
-            busFileStream.open("buses.txt", std::ios::in | std::ios::app | std::ios::binary);
+            railFileStream.open("railes.txt", std::ios::in | std::ios::app | std::ios::binary);
             tempFileStream.open("temp.txt", std::ios::out | std::ios::app | std::ios::binary);
 
-            busFileStream.read((char *)&b, sizeof(b));
-            while (!busFileStream.eof())
+            railFileStream.read((char *)&b, sizeof(b));
+            while (!railFileStream.eof())
             {
-                if (b.getSource() == from && b.getDestination() == to && b.getBusNo().compare(bNo) == 0)
+                if (b.getSource() == from && b.getDestination() == to && b.getRailNo().compare(bNo) == 0)
                 {
                     if (b.getBookedSeats() >= 32)
                     {
@@ -132,18 +132,18 @@ void Ticket::bookTicket()
                 {
                     tempFileStream.write((char *)&b, sizeof(b));
                 }
-                busFileStream.read((char *)&b, sizeof(b));
+                railFileStream.read((char *)&b, sizeof(b));
             }
 
             if (booked == 1)
             {
-                busFileStream.close();
+                railFileStream.close();
                 tempFileStream.close();
-                remove("buses.txt");
-                rename("temp.txt", "buses.txt");
+                remove("railes.txt");
+                rename("temp.txt", "railes.txt");
             }
         }
-        busFileStream.close();
+        railFileStream.close();
     }
 }
 
@@ -155,10 +155,10 @@ void Ticket::cancelTicket()
     std::string pnr;
     int chk = 0;
 
-    std::fstream busFileStream;
+    std::fstream railFileStream;
     std::fstream ticketFileStream;
     std::fstream tempFileStream;
-    std::fstream busTempFileStream;
+    std::fstream railTempFileStream;
 
     printHeading("CANCEL TICKET");
     std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter PNR Number:-> ";
@@ -184,28 +184,28 @@ void Ticket::cancelTicket()
             }
             else
             {
-                Bus b;
-                busFileStream.open("buses.txt",std::ios::in | std::ios::app | std::ios::binary);
-                busTempFileStream.open("bustemp.txt", std::ios::out | std::ios::app | std::ios::binary);
+                Rail b;
+                railFileStream.open("railes.txt",std::ios::in | std::ios::app | std::ios::binary);
+                railTempFileStream.open("railtemp.txt", std::ios::out | std::ios::app | std::ios::binary);
 
-                busFileStream.read((char *)&b, sizeof(b));
-                while (!busFileStream.eof())
+                railFileStream.read((char *)&b, sizeof(b));
+                while (!railFileStream.eof())
                 {
-                    if (b.getBusNo().compare(bus.getBusNo()) == 0)
+                    if (b.getRailNo().compare(rail.getRailNo()) == 0)
                     {
                         b.setCancelTicket();
-                        busTempFileStream.write((char *)&b, sizeof(b));
+                        railTempFileStream.write((char *)&b, sizeof(b));
                     }
                     else
                     {
-                        busTempFileStream.write((char *)&b, sizeof(b));
+                        railTempFileStream.write((char *)&b, sizeof(b));
                     }
-                    busFileStream.read((char *)&b, sizeof(b));
+                    railFileStream.read((char *)&b, sizeof(b));
                 }
-                busFileStream.close();
-                busTempFileStream.close();
-                remove("buses.txt");
-                rename("bustemp.txt", "buses.txt");
+                railFileStream.close();
+                railTempFileStream.close();
+                remove("railes.txt");
+                rename("railtemp.txt", "railes.txt");
                 chk = 1;
             }
             ticketFileStream.read((char *)this, sizeof(*this));
@@ -382,8 +382,7 @@ void Ticket::showTicketsByName()
     }
 }
 
-// SHOW TICKET BY BUS
-void Ticket::showTicketsByBus()
+void Ticket::showTicketsByRail()
 {
     system("cls");
 
@@ -392,7 +391,7 @@ void Ticket::showTicketsByBus()
     std::fstream ticketFileStream;
 
     printHeading("SHOW BOOKINGS BY NAME");
-    std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter Bus Number:-> ";
+    std::cout << "\n\t\t\t\t\t\t\t\t\t\tEnter rail Number:-> ";
     std::cin.ignore();
     std::getline(std::cin,bNo);
 
@@ -411,7 +410,7 @@ void Ticket::showTicketsByBus()
         ticketFileStream.read((char *)this, sizeof(*this));
         while (!ticketFileStream.eof())
         {
-            if (bus.getBusNo().compare(bNo) == 0)
+            if (rail.getRailNo().compare(bNo) == 0)
             {
                 displayTicket();
                 chk = 1;
@@ -455,7 +454,7 @@ void Ticket::showTicketsBySource()
         ticketFileStream.read((char *)this, sizeof(*this));
         while (!ticketFileStream.eof())
         {
-            if (bus.getSource() == s)
+            if (rail.getSource() == s)
             {
                 displayTicket();
                 chk = 1;
@@ -499,7 +498,7 @@ void Ticket::showTicketsByDestination()
         ticketFileStream.read((char *)this, sizeof(*this));
         while (!ticketFileStream.eof())
         {
-            if (bus.getDestination() == d)
+            if (rail.getDestination() == d)
             {
                 displayTicket();
                 chk = 1;
