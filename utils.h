@@ -2,37 +2,48 @@
 #define UTILS_H
 
 #include <cstdlib>
-#include <string>
 #include <ctime>
+#include <iostream>
+#include <random>
+#include <string>
+#include <chrono>
 
-using namespace std;
-
-void printHeading(string header)
+void printHeading(const std::string& header)
 {
-    cout << "\n\n\n\n";
-    cout << "\t\t\t\t\t\t\t\t\t\t==========================================================\n";
-    cout << "\t\t\t\t\t\t\t\t\t\t                       " << header << "                     \n";
-    cout << "\t\t\t\t\t\t\t\t\t\t==========================================================\n\n";
+    std::cout << "\n\n\n\n";
+    std::cout << "\t\t\t\t\t\t\t\t\t\t==========================================================\n";
+    std::cout << "\t\t\t\t\t\t\t\t\t\t                       " << header << "                     \n";
+    std::cout << "\t\t\t\t\t\t\t\t\t\t==========================================================\n\n";
 }
 
-string generatePNR(int n)
+std::string generatePNR(int n)
 {
-    srand(time(0));
+    std::random_device rd;
+    std::uniform_int_distribution<int> dis(0, n - 1);
 
-    string pnr;
+    // Generate a random number
+    int randomNo = n+100;
 
-    int randomNo = rand() % n;
-
-    pnr = "PNR" + to_string(randomNo);
-
-    return pnr;
+    return "PNR" + std::to_string(randomNo);
 }
 
-string getCurrentDate()
+std::string getCurrentDate()
 {
-    time_t t = time(NULL);
-    tm *tPtr = localtime(&t);
+    auto now = std::chrono::system_clock::now();
 
-    return to_string(tPtr->tm_mday) + "-" + to_string((tPtr->tm_mon) + 1) + "-" + to_string((tPtr->tm_year) + 1900);
+    auto time = std::chrono::system_clock::to_time_t(now);
+    struct tm tmInfo;
+
+    #ifdef _WIN32
+    localtime_s(&tmInfo, &time); // Windows version of localtime_r
+    #else
+    localtime_r(&time, &tmInfo); // POSIX version of localtime_r
+    #endif
+
+    std::string formattedDate = std::to_string(tmInfo.tm_mday) + "-" +
+                                std::to_string(tmInfo.tm_mon + 1) + "-" +
+                                std::to_string(tmInfo.tm_year + 1900);
+
+    return formattedDate;
 }
-#endif // UTILS_H
+#endif
